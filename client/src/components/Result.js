@@ -17,9 +17,7 @@ const Result = ({ showResult, quizs, marks, startOver }) => {
               <h1 className="mb-2 fw-bold">
                 {marks > (quizs.length * 5) / 2 ? "Awesome!" : "Oops!"}
               </h1>
-              <h3 className="mb-3 fw-bold">
-                Your score is {marks} out of {quizs.length * 5}
-              </h3>
+              <h3 className="mb-3 fw-bold">Your score is {marks}%</h3>
 
               <button
                 onClick={startOver}

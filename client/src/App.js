@@ -11,6 +11,7 @@ function App() {
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [marks, setMarks] = useState(0);
+  const [rank, setRank] = useState(0);
 
   // Display Controlling States
   const [showStart, setShowStart] = useState(true);
@@ -31,18 +32,24 @@ function App() {
     }
   }, [quizs, questionIndex]);
 
+  useEffect(() => {
+    fetch("/ranks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ score: marks * 10 }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setRank(data.rank);
+      })
+      .catch((error) => console.log(error));
+  }, [marks]);
+
   // Start Quiz
   const startQuiz = () => {
     setShowStart(false);
     setShowQuiz(true);
   };
-
-  // eslint-disable-next-line no-lone-blocks
-  {
-    /*
-     * // TODO:  do not show correct Answer, add random method to filteredArray
-     */
-  }
 
   // Check Answer
   const checkAnswer = (event, selected) => {
@@ -52,7 +59,7 @@ function App() {
 
       if (selected === question.pos) {
         event.target.classList.add("bg-success");
-        setMarks(marks + 5);
+        setMarks(marks + 1);
       } else {
         event.target.classList.add("bg-danger");
       }
@@ -114,7 +121,7 @@ function App() {
       <Result
         showResult={showResult}
         quizs={quizs}
-        marks={marks}
+        marks={rank}
         startOver={startOver}
       />
     </>
