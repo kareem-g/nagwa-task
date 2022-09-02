@@ -115,6 +115,7 @@ function App() {
         questionIndex={questionIndex}
         nextQuestion={nextQuestion}
         showTheResult={showTheResult}
+        marks={marks}
       />
 
       {/* Result Page */}

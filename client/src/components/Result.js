@@ -23,7 +23,7 @@ const Result = ({ showResult, quizs, marks, startOver }) => {
                 onClick={startOver}
                 className="btn py-2 px-4 btn-light fw-bold d-inline"
               >
-                Start Over
+                Try Again{" "}
               </button>
             </div>
           </div>

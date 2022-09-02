@@ -5,13 +5,15 @@ const Quiz = ({
   question,
   quizs,
   checkAnswer,
-  correctAnswer,
   selectedAnswer,
   questionIndex,
   nextQuestion,
   showTheResult,
+  marks,
 }) => {
   const answers = ["noun", "adverb", "adjective", "verb"];
+  console.log((marks / quizs.length) * 100);
+
   return (
     <section
       className="bg-dark text-white"
@@ -25,16 +27,28 @@ const Quiz = ({
               style={{ background: "#3d3d3d", borderColor: "#646464" }}
             >
               <div className="d-flex justify-content-between gap-md-3">
-                <h5 className="mb-2 fs-normal lh-base">{question?.word}</h5>
+                <h5 className="mb-2 fs-normal lh-base w-25">
+                  {question?.word}
+                </h5>
+                <div>
+                  <progress
+                    className="Bar"
+                    value={(marks / quizs.length) * 100}
+                    max="100"
+                  >
+                    {" "}
+                    {(marks / quizs.length) * 100}{" "}
+                  </progress>
+                </div>
                 <h5
                   style={{
                     color: "#60d600",
-                    width: "100px",
+                    width: "10rem",
                     textAlign: "right",
                   }}
                 >
                   {quizs.indexOf(question) + 1} / {quizs?.length}
-                </h5>
+                </h5>{" "}
               </div>
               <div>
                 {answers?.map((item, index) => (
